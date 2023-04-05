@@ -1,0 +1,46 @@
+{%extends 'nevigation.html'%} {%block body%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+      }
+      .con > * {
+        margin-bottom: 20px;
+        width: 200px;
+        padding: 10px;
+      }
+      .con h1 {
+        width: 400px;
+        background-color: black;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="con">
+      <h1>{{session}} session</h1>
+      {%for o in ob%}
+      <button>
+        <a
+          onclick="window.location.href='/viewCourse/{{session}}/{{o.qd.semId}}'"
+          >{{o.st}}</a
+        >
+      </button>
+      {%endfor%}
+    </div>
+  </body>
+</html>
+{%endblock body%}

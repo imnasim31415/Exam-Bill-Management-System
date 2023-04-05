@@ -1,0 +1,80 @@
+{%extends 'nevigation.html'%} {%block body%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      form > * {
+        padding: 10px;
+        width: 300px;
+        background: black;
+        color: white;
+        margin-top: 20px;
+        font-weight: 700;
+      }
+      #popdiv {
+        height: 100%;
+        width: 100%;
+        opacity: 0.5;
+        background-color: BLACK;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        left: 0;
+      }
+      #alert1 {
+        background: white;
+        width: 350px;
+        padding: 20px;
+        height: 200px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        position: absolute;
+        z-index: 9999;
+        text-align: center;
+        top: 40%;
+        left: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 20px;
+        color: black;
+        border-bottom: solid 25px #a90c04;
+      }
+      .button {
+        width: 100px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% for msg in messages%} {% if 'nn' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert1">
+      <strong> {{msg}} </strong>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {%endif%} {%endfor%}
+    <div class="con">
+      <form method="POST">
+        {%csrf_token%} {%for o in ob%}
+        <input type="submit" value="{{o.email}}" name="teacher" readonly />
+        {{o.name}} {%endfor%}
+      </form>
+    </div>
+  </body>
+</html>
+{%endblock body%}

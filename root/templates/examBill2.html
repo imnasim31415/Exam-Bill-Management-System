@@ -1,0 +1,109 @@
+{%extends 'nevigation.html'%} {%block body%}
+<!DOCTYPE html>
+<style>
+  .con {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    background: rgb(44, 42, 42);
+  }
+  form > * {
+    padding: 10px;
+    width: 300px;
+    margin-top: 20px;
+  }
+  button {
+    background: black;
+    color: white;
+    font-weight: 800;
+    width: 200px;
+  }
+  #popdiv {
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    background-color: BLACK;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    left: 0;
+  }
+  #alert1 {
+    background: white;
+    width: 350px;
+    padding: 20px;
+    height: 200px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    position: absolute;
+    z-index: 9999;
+    text-align: center;
+    top: 40%;
+    left: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    color: black;
+    border-bottom: solid 25px #a90c04;
+  }
+  .button {
+    width: 100px;
+  }
+</style>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% for msg in messages%} {% if 'nn' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert1">
+      <strong> {{msg}} </strong>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {% elif 'chair' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert1">
+      <strong> {{msg}} </strong>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {%endif%} {%endfor%}
+    <div class="con">
+      <form method="POST">
+        {%csrf_token%}
+        <input
+          type="number"
+          name="session"
+          placeholder="Enter Session"
+          required
+        />
+        <select name="semester" id="">
+          <option selected disabled>Selct Semester</option>
+          <option value="10">Masters 2nd Semester</option>
+          <option value="9">Masters 1st Semester</option>
+          <option value="8">4th Year 2nd Semester</option>
+          <option value="7">4th Year 1st Semester</option>
+          <option value="6">3rd Year 2nd Semester</option>
+          <option value="5">3rd Year 1st Semester</option>
+          <option value="4">2nd Year 2nd Semester</option>
+          <option value="3">2nd Year 1st Semester</option>
+          <option value="2">1st Year 2nd Semester</option>
+          <option value="1">1st Year 1st Semester</option>
+        </select>
+        <button type="submit">View</button>
+      </form>
+    </div>
+  </body>
+</html>
+{%endblock body%}

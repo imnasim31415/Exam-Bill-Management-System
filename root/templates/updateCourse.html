@@ -1,0 +1,179 @@
+{%extends 'nevigation.html'%} {%block body%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 40px;
+      }
+      form {
+        padding: 20px;
+        background: whitesmoke;
+        box-shadow: 0 0 5px black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      form > * {
+        padding: 10px;
+        width: 250px;
+        margin-top: 10px;
+      }
+      label {
+        padding: 0;
+      }
+      h2 {
+        font-weight: 800;
+        width: 100%;
+      }
+      button {
+        background: black;
+        width: 200px;
+        margin-top: 30px;
+        font-weight: 800;
+        color: white;
+        padding: 10px;
+      }
+      strong {
+        text-align: center;
+        background: black;
+        padding: 10px;
+        color: white;
+      }
+      h4 {
+        background: white;
+        width: 250px;
+        padding: 10px;
+        font-size: 16px;
+
+        border: 2px solid black;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="con">
+      <form method="POST">
+        {%csrf_token%} {%if theory%}
+        <h2>Update Course</h2>
+        <label for="">Select Internal</label>
+        <select name="internal">
+          <option value="{{course.internal.email}}" selected>
+            {{course.internal.name}}
+          </option>
+          {%for o in ob%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <label for="">Select External</label>
+        <select name="external">
+          <option value="{{course.external.email}}" selected>
+            {{course.external.name}}
+          </option>
+          {%for o in ob%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <label for="">Select Third Examiner</label>
+        <select name="third" id="">
+          <option value="{{course.thirdExaminer.email}}" selected>
+            {{course.thirdExaminer.name}}
+          </option>
+          {%for o in ob%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <label for="">Enter Paper NO</label>
+        <input type="number" name="paperNo" value="{{course.paperNo}}" />
+        <label for="">Enter Third Examiner Paper NO</label>
+        <input type="number" name="tpaperNo" value="{{course.tPaperNo}}" />
+        <button name="theory" type="submit">Update</button>
+      </form>
+      {%endif%} {%if lab%}
+      <form method="POST">
+        {%csrf_token%}
+        <label for="">Lab Internal</label>
+        <select name="internal" id="">
+          <option value="{{course.internal.email}}" selected>
+            {{course.internal.name}}
+          </option>
+          {%for o in ob%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <label for="">Lab External</label>
+        <select name="external" id="">
+          <option value="{{course.external.email}}" selected>
+            {{course.external.name}}
+          </option>
+          {%for o in ob%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <strong>Lab Invigilators</strong>
+        {%for o in extra%}
+        <h4>{{o.extra.name}}</h4>
+        {%endfor%}
+        <button type="submit" name="invigilator">Add Invigilator</button>
+        <label for="">Enter Duration</label>
+        <input
+          type="number"
+          value="{{course.duration}}"
+          name="duration"
+          placeholder="Enter Duration"
+        />
+        <button type="submit" name="lab">Update</button>
+      </form>
+      {%endif%} {%if viva%}
+      <form method="POST">
+        {%csrf_token%}
+        <label for="">Select External</label>
+        <select name="external" id="">
+          <option value="{{course.vivaExternal.email}}" selected>
+            {{course.vivaExternal.name}}
+          </option>
+          {%for o in ex%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <strong>Internals </strong>
+        {%for o in extra%}
+        <h4>{{o.extra.name}}</h4>
+        {%endfor%}
+        <button type="submit" name="invigilator">Add Internals</button>
+        <label>Enter Duration</label>
+        <input
+          type="number"
+          value="{{course.duration}}"
+          name="duration"
+          placeholder="Enter Duration"
+        />
+        <button type="submit" name="viva">Update</button>
+      </form>
+      {%endif%}
+      <button
+        onclick="
+      window.location.href='/thesis/{{session}}/{{semester}}/{{id3}}'
+      "
+      >
+        Thesis Evaluation
+      </button>
+      <button
+        onclick="
+      window.location.href='/supervising/{{session}}/{{semester}}/{{id3}}'
+      "
+      >
+        Thesis Supervising
+      </button>
+    </div>
+  </body>
+</html>
+{%endblock%}

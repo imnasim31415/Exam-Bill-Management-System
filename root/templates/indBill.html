@@ -1,0 +1,105 @@
+{%extends 'nevigation.html'%} {%block body%}
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    body {
+      background: white;
+    }
+    .con {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 100px;
+    }
+    table {
+      width: 70vw;
+      border-collapse: collapse;
+      margin: 50px auto;
+      background: whitesmoke;
+    }
+
+    .el > * {
+      border-bottom: 2px solid black;
+    }
+    th {
+      background: black;
+      color: white;
+      font-weight: bold;
+    }
+
+    td,
+    th {
+      padding: 10px;
+      border: 1px solid black;
+      text-align: left;
+      font-size: 18px;
+    }
+    button {
+      background: seagreen;
+      border: none;
+      outline: none;
+      color: white;
+      padding: 10px;
+      font-size: 20px;
+      font-weight: 600;
+      width: 250px;
+      margin-bottom: 50px;
+    }
+  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="con">
+      <div class="el">
+        <h4><strong>Examiner Name : </strong>{{name.name}}</h4>
+        <h4><strong>Title : </strong>{{name.title}}</h4>
+        <h4>
+          <strong><strong>Session : </strong>{{session}} {{ss}}</strong>
+        </h4>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Department</th>
+            <th>Course Code</th>
+            <th>Paper No</th>
+            <th>Student No</th>
+            <th>Duration</th>
+            <th>Amount in TK</th>
+          </tr>
+        </thead>
+        {%for o in ob%}
+        <tr>
+          <td>{{o.role}}</td>
+          <td>{{o.courseName}}</td>
+          <td>{{o.courseCode}}</td>
+          <td>{{o.st}}</td>
+          <td>{{o.paperNo}}</td>
+          <td>{{o.duration}}</td>
+          <td>{{o.bill}}</td>
+        </tr>
+        {%endfor%}
+        <tr>
+          <th>Total</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>{{total}}</th>
+        </tr>
+      </table>
+      <form method="POST">
+        {%csrf_token%}
+        <button name="pdf" type="submit">Generate Pdf</button>
+      </form>
+    </div>
+  </body>
+</html>
+{%endblock body%}

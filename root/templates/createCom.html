@@ -1,0 +1,262 @@
+{%extends 'nevigation.html'%} {%block body%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 100px;
+      }
+      form {
+        background: whitesmoke;
+        padding: 40px;
+        box-shadow: 0 0 10px black;
+        margin-top: 100px;
+        display: flex;
+        width: 500px;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      input {
+        padding: 10px;
+        width: 400px;
+      }
+      select {
+        padding: 10px;
+        width: 400px;
+      }
+      form > * {
+        margin-bottom: 20px;
+      }
+      form > label {
+        margin-left: 0;
+      }
+      button {
+        width: 200px;
+        border: 2px solid black;
+        padding: 10px;
+        background: black;
+        color: white;
+        font-size: 18px;
+      }
+
+      #alert1 {
+        background: white;
+        width: 350px;
+        padding: 20px;
+        height: 200px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        position: absolute;
+        z-index: 9999;
+        text-align: center;
+        top: 40%;
+        left: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 20px;
+        color: black;
+        border-bottom: solid 25px #a90c04;
+      }
+      #alert1 #suc {
+        box-shadow: rgb(211, 57, 57) 0px 7px 29px 0px;
+        font-size: 5rem;
+        color: white;
+        background: #d13e36fc;
+        padding: 25px;
+        border-radius: 50%;
+        position: absolute;
+        top: -20%;
+        left: 32%;
+      }
+      #alert1 #ok {
+        box-shadow: #4bb543 0px 7px 29px 0px;
+        font-size: 5rem;
+        color: white;
+        background: #4bb543;
+        padding: 25px;
+        border-radius: 50%;
+        position: absolute;
+        top: -20%;
+        left: 32%;
+      }
+      #alert1 h3 {
+        color: red;
+        margin-bottom: 20px;
+      }
+      .sub {
+        margin-top: 100px;
+        text-align: center;
+      }
+      strong {
+        margin-top: 20px;
+      }
+      #alert2 {
+        background: white;
+        width: 350px;
+        padding: 20px;
+        height: 200px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        position: absolute;
+        z-index: 9999;
+        text-align: center;
+        top: 40%;
+        left: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 20px;
+        color: black;
+        border-bottom: solid 25px #39cf2e;
+      }
+      #alert2 #ok {
+        box-shadow: #4bb543 0px 7px 29px 0px;
+        font-size: 5rem;
+        color: white;
+        background: #4bb543;
+        padding: 25px;
+        border-radius: 50%;
+        position: absolute;
+        top: -20%;
+        left: 32%;
+      }
+      #popdiv {
+        height: 100%;
+        width: 100%;
+        opacity: 0.5;
+        background-color: BLACK;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        left: 0;
+      }
+      #alert2 h3 {
+        color: #4bb543;
+        margin-bottom: 20px;
+      }
+      #popdiv {
+        height: 100%;
+        width: 100%;
+        opacity: 0.5;
+        background-color: BLACK;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        left: 0;
+      }
+      .sub {
+        margin-top: 100px;
+        text-align: center;
+      }
+      .button {
+        margin-top: 40px;
+        padding: 10px 20px;
+        background: white;
+        border-radius: 10px;
+        outline: none;
+        color: black;
+        box-shadow: rgba(52, 39, 39, 0.24) 0px 3px 8px;
+        border: none;
+        cursor: pointer;
+        width: 100px;
+        font-weight: 400;
+        font-size: 18px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% for msg in messages%} {% if 'chairman' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert1">
+      <strong> {{msg}} </strong>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {%elif 'success' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert2">
+      <strong>{{msg}}</strong>
+      <button class="button" onclick="window.location.href='/'">Close</button>
+    </div>
+    {% elif 'sem' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert1">
+      <strong> {{msg}} </strong>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {% elif 'twice' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert1">
+      <strong> {{msg}} </strong>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {% elif 'access' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert1">
+      <strong> {{msg}} </strong>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {%endif%} {%endfor%}
+
+    <div class="con">
+      <form method="POST">
+        <h1>Create Committee</h1>
+        {%csrf_token%}
+        <label for="">Select Session</label>
+        <input type="number" name="session" id="" />
+        <label for="">Select Semester</label>
+        <select name="year">
+          <option selected disabled></option>
+          <option value="10">5-2</option>
+          <option value="9">5-1</option>
+          <option value="8">4-2</option>
+          <option value="7">4-1</option>
+          <option value="6">3-2</option>
+          <option value="5">3-1</option>
+          <option value="4">2-2</option>
+          <option value="3">2-1</option>
+          <option value="2">1-2</option>
+          <option value="1">1-1</option>
+        </select>
+        <label>Select Chairman</label>
+        <select name="chairman">
+          <option selected disabled></option>
+          {%for o in ob%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <label>Select Tabulator 1</label>
+        <select name="tabular1">
+          <option selected disabled></option>
+          {%for o in ob%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <label>Select Tabulator 2</label>
+        <select name="tabular2">
+          <option selected disabled></option>
+          {%for o in ob%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <label for="">Select External</label>
+        <select name="external" id="">
+          <option selected disabled></option>
+          {%for o in oc%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <button type="submit">Create</button>
+      </form>
+    </div>
+  </body>
+</html>
+{%endblock body%}

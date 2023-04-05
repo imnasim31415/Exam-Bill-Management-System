@@ -1,0 +1,218 @@
+{%extends 'nevigation.html'%} {%block body %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      #alert1 {
+        background: white;
+        width: 350px;
+        padding: 20px;
+        height: 200px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        position: absolute;
+        z-index: 9999;
+        text-align: center;
+        top: 40%;
+        left: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 20px;
+        color: black;
+        border-bottom: solid 25px #a90c04;
+      }
+      #alert1 #suc {
+        box-shadow: rgb(211, 57, 57) 0px 7px 29px 0px;
+        font-size: 5rem;
+        color: white;
+        background: #d13e36fc;
+        padding: 25px;
+        border-radius: 50%;
+        position: absolute;
+        top: -20%;
+        left: 32%;
+      }
+      #alert1 #ok {
+        box-shadow: #4bb543 0px 7px 29px 0px;
+        font-size: 5rem;
+        color: white;
+        background: #4bb543;
+        padding: 25px;
+        border-radius: 50%;
+        position: absolute;
+        top: -20%;
+        left: 32%;
+      }
+      #alert1 h3 {
+        color: red;
+        margin-bottom: 20px;
+      }
+      .sub {
+        margin-top: 100px;
+        text-align: center;
+      }
+      strong {
+        margin-top: 20px;
+      }
+      #alert2 {
+        background: white;
+        width: 350px;
+        padding: 20px;
+        height: 200px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        position: absolute;
+        z-index: 9999;
+        text-align: center;
+        top: 40%;
+        left: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 20px;
+        color: black;
+        border-bottom: solid 25px #39cf2e;
+      }
+      #alert2 #ok {
+        box-shadow: #4bb543 0px 7px 29px 0px;
+        font-size: 5rem;
+        color: white;
+        background: #4bb543;
+        padding: 25px;
+        border-radius: 50%;
+        position: absolute;
+        top: -20%;
+        left: 32%;
+      }
+      #popdiv {
+        height: 100%;
+        width: 100%;
+        opacity: 0.5;
+        background-color: BLACK;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        left: 0;
+      }
+      #alert2 h3 {
+        color: #4bb543;
+        margin-bottom: 20px;
+      }
+      #popdiv {
+        height: 100%;
+        width: 100%;
+        opacity: 0.5;
+        background-color: BLACK;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        left: 0;
+      }
+      .sub {
+        margin-top: 100px;
+        text-align: center;
+      }
+      .button {
+        margin-top: 40px;
+        padding: 10px 20px;
+        background: white;
+        border-radius: 10px;
+        outline: none;
+        color: black;
+        box-shadow: rgba(52, 39, 39, 0.24) 0px 3px 8px;
+        border: none;
+        cursor: pointer;
+        width: 100px;
+        font-weight: 400;
+        font-size: 18px;
+      }
+      .con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      form {
+        background: whitesmoke;
+        box-shadow: 0 0 5px black;
+        padding: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 50px;
+      }
+      h2 {
+        text-align: center;
+        text-transform: uppercase;
+        background: black;
+        padding: 5px;
+        font-size: 20px;
+        color: white;
+      }
+      form > * {
+        padding: 10px;
+        margin-bottom: 20px;
+        width: 300px;
+      }
+      button {
+        background: rgb(23, 23, 37);
+        color: white;
+        font-size: 18px;
+        width: 200px;
+        margin-bottom: 20px;
+        width: 300px;
+        padding: 10px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% for msg in messages%} {% if 'error' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert1">
+      <strong> {{msg}} </strong>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {%elif 'success' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert2">
+      <strong>{{msg}}</strong>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {%endif%} {%endfor%}
+    <div class="con">
+      <form method="POST">
+        <h2>Create Course</h2>
+        {%csrf_token%}
+        <input type="text" name="name" placeholder="Enter Course Name" />
+        <input type="number" name="code" placeholder="Enter Course Code" />
+        <input type="number" name="credit" placeholder="Enter Credits" />
+        <select name="type" id="">
+          <option selected disabled>Select Course Type</option>
+          <option value="1">Theory</option>
+          <option value="2">Lab</option>
+          <option value="3">Viva</option>
+        </select>
+        <select name="internal" id="">
+          <option selected disabled>Select Internal</option>
+          {%for o in ob%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <select name="external" id="">
+          <option selected disabled>Select External</option>
+          {%for o in ob%}
+          <option value="{{o.email}}">{{o.name}}</option>
+          {%endfor%}
+        </select>
+        <button type="submit">Create</button>
+      </form>
+    </div>
+  </body>
+</html>
+{%endblock body%}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 100px;
+      }
+      input {
+        padding: 10px;
+        width: 200px;
+      }
+      form {
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px black;
+        background: whitesmoke;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      form > * {
+        margin-bottom: 20px;
+      }
+      button {
+        padding: 10px;
+        width: 150px;
+        font-weight: 700;
+        font-size: 16px;
+      }
+      .notun {
+        background: rgba(92, 84, 84, 0.757);
+        position: absolute;
+        min-height: 142vh;
+        min-width: 100vw;
+        z-index: 5;
+      }
+      #alert1 {
+        background: rgb(184, 94, 94);
+        position: absolute;
+        left: 50%;
+        z-index: 400;
+        width: 300px;
+        padding: 40px;
+        top: 30%;
+        left: 40%;
+        color: white;
+        border-radius: 10px;
+        font-family: "Courier New", Courier, monospace;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+      }
+      #alert1 button {
+        padding: 10px;
+        width: 200px;
+        border: none;
+        background: white;
+        color: #db341e;
+        font-weight: 800;
+        margin-left: 20%;
+        outline: none;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 18px;
+        cursor: pointer;
+      }
+      #alert1 h3 {
+        text-align: center;
+      }
+      #alert1 h2 {
+        text-align: center;
+        margin-top: 0;
+        font-size: 19px;
+        font-weight: 500;
+        margin-bottom: 10px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {%for msg in messages%} {%if 'log' in msg.tags%}
+    <div class="notun"></div>
+    <div
+      id="alert1"
+      class="alert alert-danger alert-dismissible fade show"
+      role="alert"
+    >
+      <div class="sub">
+        <h3>Error Occurred!</h3>
+        <h2>{{msg}}</h2>
+      </div>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {%endif%} {%endfor%}
+    <form method="POST">
+      <h1>Log In</h1>
+      {%csrf_token%}
+      <input type="email" name="email" placeholder="a@gmail.com" required />
+      <input type="password" name="pass" placeholder="*******" required />
+      <button type="submit" name="log">Login</button>
+    </form>
+  </body>
+</html>
