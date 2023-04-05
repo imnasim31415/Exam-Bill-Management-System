@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    .con {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    table {
+      width: 100vw;
+      border-collapse: collapse;
+      margin: 50px auto;
+    }
+
+    .el > * {
+      border-bottom: 2px solid black;
+    }
+
+    td,
+    th {
+      border: 1px solid black;
+      text-align: left;
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+    }
+    button {
+      background: seagreen;
+      border: none;
+      outline: none;
+      color: white;
+      padding: 10px;
+      font-size: 20px;
+      font-weight: 600;
+      width: 250px;
+      margin-bottom: 50px;
+    }
+    .k {
+      background: whitesmoke;
+      border: none;
+    }
+    .k th,
+    tr {
+      border: none;
+    }
+    .k th {
+      background: whitesmoke;
+      white-space: pre-wrap;
+    }
+    .ok {
+      width: 2rem;
+    }
+  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="con">
+      <tr style="text-align: center">
+        <th><h1>Exam Controller's Office</h1></th>
+      </tr>
+      <tr style="text-align: center">
+        <th><h4>Jahangirnagar University</h4></th>
+      </tr>
+      <tr style="text-align: center">
+        <th style="margin-right: 200px">
+          Date ................................
+        </th>
+        <th>Page No .............................</th>
+      </tr>
+      <tr>
+        <th>
+          <h3>
+            Examiner Name (In Bengali): .....................................
+          </h3>
+        </th>
+      </tr>
+      <tr>
+        <th>
+          <h3>
+            Examiner Name (In Capital letters):
+            .......................................................
+          </h3>
+        </th>
+      </tr>
+      <tr>
+        <h3>
+          Title and Address:
+          ........................................................
+        </h3>
+      </tr>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="ok">Role</th>
+            <th>Department</th>
+            <th>Course Code</th>
+            <th>Student No</th>
+            <th>Paper No</th>
+            <th>Duration</th>
+            <th>Amount in TAKA</th>
+          </tr>
+        </thead>
+        {%for o in ob%}
+        <tr>
+          <th class="ok">{{o.role}}</th>
+          <th>{{o.courseName}}</th>
+          <th>{{o.courseCode}}</th>
+          <th>{{o.st}}</th>
+          <th>{{o.paperNo}}</th>
+          <th>{{o.duration}}</th>
+          <th>{{o.bill}}</th>
+        </tr>
+        {%endfor%}
+        <tr>
+          <th>Total</th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>{{total}}</th>
+        </tr>
+      </table>
+      <tr style="text-align: center">
+        <th class="ko">Chairman Signature</th>
+        <th class="ko">Examiner Signature</th>
+      </tr>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+{%extends 'nevigation.html'%} {%block body%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: whitesmoke;
+        padding: 20px;
+      }
+      .el {
+        text-align: center;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {%if theory%}
+    <div class="con">
+      <h2>{{course.courseName}}</h2>
+      <h3><strong>Course Code</strong> : {{course.courseCode}}</h3>
+      <label for="">Course Internal</label>
+      <h3>{{course.internal.name}}</h3>
+      <label for="">Course External</label>
+      <h3>{{course.external.name}}</h3>
+      <label for="">Third Examiner</label>
+      <h3>{{course.thirdExaminer.name}}</h3>
+      <h3><strong>Paper No : </strong>{{course.paperNo}}</h3>
+      <h3><strong>Third Examiner Paper No : </strong>{{course.tPaperNo}}</h3>
+      <h3><strong>Duration : </strong>{{course.duration}}</h3>
+    </div>
+    {%endif%} {%if lab%}
+    <div class="con">
+      <h2>{{course.courseName}}</h2>
+      <h3><strong>Course Code</strong> : {{course.courseCode}}</h3>
+      <label for="">Course Internal</label>
+      <h3>{{course.internal.name}}</h3>
+      <label for="">Course External</label>
+      <h3>{{course.external.name}}</h3>
+      <label for="">Invigilators</label>
+      <div class="el">
+        {%for o in extra%}
+        <h3>{{o.extra.name}}</h3>
+        {%endfor%}
+      </div>
+    </div>
+    {%endif%} {%if viva%}
+    <div class="con">
+      <h2>{{course.courseName}}</h2>
+      <h3><strong>Course Code</strong> : {{course.courseCode}}</h3>
+      <label for="">Viva Internal</label>
+      <div class="el">
+        {%for o in extra%}
+        <h3>{{o.extra.name}}</h3>
+        {%endfor%}
+      </div>
+      <label for="">Viva External</label>
+      <h3>{{course.vivaExternal.name}}</h3>
+      <h3><strong>Duration : </strong>{{course.duration}}</h3>
+    </div>
+    {%endif%}
+  </body>
+</html>
+{%endblock body%}

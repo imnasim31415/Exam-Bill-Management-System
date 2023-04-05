@@ -1,0 +1,82 @@
+{%extends 'nevigation.html'%} {%block body%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      .con {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .el {
+        width: 600px;
+        display: flex;
+        background: rgb(27, 26, 26);
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        padding: 10px;
+        margin-top: 20px;
+        box-shadow: 0 0 5px black;
+        cursor: pointer;
+      }
+      .el:hover {
+        background: rgb(77, 75, 72);
+      }
+      button {
+        padding: 10px;
+        width: 200px;
+        font-weight: 800;
+        margin-top: 20px;
+      }
+      h2 {
+        font-weight: 800;
+      }
+      .button button {
+        color: black;
+        font-weight: 800;
+        background: white;
+        padding: 5px;
+        width: 100px;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="con">
+      <h2>Courses</h2>
+      {%for o in ob%}
+      <form method="POST">
+        {%csrf_token%}
+        <div
+          class="el"
+          onclick="window.location.href='/indCourse/{{session}}/{{semester}}/{{o.courseCode}}'"
+        >
+          <h3>{{o.courseName}}</h3>
+          {%if flag%}
+          <div class="button">
+            <button type="submit" value="{{o.courseCode}}" name="update">
+              Update
+            </button>
+            <button type="submit" value="{{o.courseCode}}" name="delete">
+              Delete
+            </button>
+          </div>
+          {%endif%}
+        </div>
+      </form>
+      {%endfor%}
+      <form method="POST">
+        {%csrf_token%} {%if flag%}
+        <button name="add" type="submit">Add Course</button>
+        {%endif%}
+      </form>
+    </div>
+  </body>
+</html>
+{%endblock body%}

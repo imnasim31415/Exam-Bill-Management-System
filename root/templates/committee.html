@@ -1,0 +1,120 @@
+{%extends 'nevigation.html'%} {%block body%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      #popdiv {
+        height: 100%;
+        width: 100%;
+        opacity: 0.5;
+        background-color: BLACK;
+        position: fixed;
+        top: 0;
+        z-index: 10;
+        left: 0;
+      }
+      #alert1 {
+        background: white;
+        width: 350px;
+        padding: 20px;
+        height: 200px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        position: absolute;
+        z-index: 9999;
+        text-align: center;
+        top: 40%;
+        left: 40%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border-radius: 20px;
+        color: black;
+        border-bottom: solid 25px #a90c04;
+      }
+      .con {
+        margin-top: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+      .con > * {
+        margin-bottom: 20px;
+      }
+      .con a {
+        color: black;
+      }
+      h1 {
+        background: black;
+        padding: 10px;
+        width: 250px;
+        text-transform: uppercase;
+        font-size: 20px;
+        font-weight: 500;
+        text-align: center;
+        color: white;
+      }
+      button {
+        padding: 10px;
+        border: 2px solid black;
+        outline: none;
+        width: 200px;
+        font-weight: 700;
+        font-size: 16px;
+      }
+      input {
+        padding: 10px;
+        width: 200px;
+      }
+      form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        border: 2px solid black;
+        padding: 20px;
+        background: whitesmoke;
+      }
+      form > * {
+        margin-bottom: 20px;
+      }
+      .button {
+        margin-top: 30px;
+        padding: 10px;
+        width: 100px;
+        border: 4px solid black;
+      }
+    </style>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    {% for msg in messages%} {% if 'session' in msg.tags%}
+    <div id="popdiv"></div>
+    <div id="alert1">
+      <strong> {{msg}} </strong>
+      <button class="button" onclick="history.back()">Close</button>
+    </div>
+    {%endif%} {%endfor%}
+    <div class="con">
+      <h1>Select an Option</h1>
+      <button><a href="/createCom">Create Committee</a></button>
+      <form method="POST">
+        <h3>View Committee</h3>
+        {%csrf_token%}
+        <input type="number" name="session" placeholder="Enter Session" />
+        <button type="submit" name="sess">Submit</button>
+      </form>
+      <form method="POST">
+        <h3>View Semester</h3>
+        {%csrf_token%}
+        <input type="number" name="session" placeholder="Enter Session" />
+        <button type="submit" name="sem">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
+{%endblock body%}
